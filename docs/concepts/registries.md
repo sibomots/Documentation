@@ -60,6 +60,25 @@ Registered objects should not be stored in fields when they are created and regi
 
 Registered objects must always be referenced through a `RegistryObject` or a field with `@ObjectHolder`.
 
+There's a difference between `RegistryObject` and Registered objects.
+A `RegistryObject` holds a Registered object.  A `RegistryObject` holding
+a Registered object allows the mod to update the object, if necessary.
+
+For example, you should have fields defined as.
+
+```java
+public static final RegistryObject<Item>
+```
+
+not
+
+```java
+public static final Item
+```
+
+As shown below, using reference to a `RegistryObject` permits the mod to
+access the underlying registered object.
+
 ### Using RegistryObjects
 
 `RegistryObject`s can be used to retrieve references to registered objects once they are available. These are used by `DeferredRegister` to return a reference to registered objects. Their references are updated after their corresponding registry's `RegistryEvent.Register` event is fired, along with the `@ObjectHolder` annotations.
